@@ -17,6 +17,8 @@ import {
 
 //Routes
 import Landing from './Landing'
+import MyFlashcards from './MyFlashcards'
+import UserProfile from './UserProfile'
 import UsersSession from './UsersSession'
 
 export default class Routes extends React.Component {
@@ -71,20 +73,27 @@ export default class Routes extends React.Component {
                 <NavLink href="#">Playground</NavLink>
               </NavItem>
               {!userLoggedIn &&
-              <NavItem>
-                <NavLink href="#users/session">Sign In</NavLink>
-              </NavItem>
+                <NavItem>
+                  <NavLink href="#users/session">Sign In</NavLink>
+                </NavItem>
               }
               {userLoggedIn &&
-              <NavItem>
-                <NavLink href="#users/session">Sign Out</NavLink>
-              </NavItem>
+                <NavItem>
+                  <NavLink href="#users/session">Sign Out</NavLink>
+                </NavItem>
               }
             </Nav>
           </Collapse>
         </Navbar>
+
+
         <Switch>
           <Route exact path="/" component={ Landing } />
+
+          <Route path="/flashcards/myflashcards" component={ MyFlashcards } />
+
+          <Route path="/myprofile" component={ UserProfile } />
+
           <Route
             path="/users/session"
             render={
