@@ -1,6 +1,6 @@
 class FlashcardsController < ApplicationController
 	before_action :authenticate_user!, except: %i[index]
-	before_action :load_flashcard, except: %i[index]
+	before_action :load_flashcard, except: %i[index create]
 
 	def index
 		flashcards = Flashcard.all
@@ -10,15 +10,27 @@ class FlashcardsController < ApplicationController
 	end
 
 	def create
+		flashcard = current_user.flashcards.new(flashcard_params)
+		if flashcard.save
+			render json: flashcard, status: 201
+		else
+			render json: flashcard.errors.full_message, status: 422
+		end
 	end
 
 	def edit
 	end
 
 	def update
+		if flashcard.update(flashcard_params)
+			redirect_to action: 'index'
+		else
+			render :edit
+		end
 	end
 
 	def destroy
+		flashcard.destroy
 	end
 
 	private
