@@ -12,12 +12,14 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap'
+  DropdownItem
+} from 'reactstrap'
 
 //Routes
 import Landing from './Landing'
+import UsersSession from './UsersSession'
 
-class Routes extends React.Component {
+export default class Routes extends React.Component {
   constructor(props) {
     super(props)
     this.toggle = this.toggle.bind(this);
@@ -70,23 +72,33 @@ class Routes extends React.Component {
               </NavItem>
               {!userLoggedIn &&
               <NavItem>
-                <NavLink href="#users/sign_in">Log In</NavLink>
+                <NavLink href="#users/session">Sign In</NavLink>
               </NavItem>
               }
               {userLoggedIn &&
               <NavItem>
-                <NavLink href="#">Log Out</NavLink>
+                <NavLink href="#users/session">Sign Out</NavLink>
               </NavItem>
               }
             </Nav>
           </Collapse>
         </Navbar>
         <Switch>
-          <Route exact path='/' component={ Landing } />
+          <Route exact path="/" component={ Landing } />
+          <Route
+            path="/users/session"
+            render={
+              (props) => 
+              <UsersSession
+                {...props}
+                userLoggedIn = { userLoggedIn }
+                userSignInRoute = { userSignInRoute }
+                userSignOutRoute = { userSignOutRoute }
+              />
+            }
+          />
         </Switch>
       </React.Fragment>
     );
   }
 }
-
-export default Routes

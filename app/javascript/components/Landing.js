@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-class Landing extends React.Component {
+export default class Landing extends React.Component {
   render () {
     return (
       <React.Fragment>
@@ -10,5 +10,3 @@ class Landing extends React.Component {
     );
   }
 }
-
-export default Landing
