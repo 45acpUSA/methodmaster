@@ -4,7 +4,7 @@ class FlashcardsController < ApplicationController
 
 	def index
 		flashcards = Flashcard.all
-		# render json: flashcards, status: 200
+		render json: flashcards, status: 200
 	end
 
 	def show
