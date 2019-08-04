@@ -3,17 +3,11 @@ class FlashcardsController < ApplicationController
 	before_action :load_flashcard, except: %i[index create]
 
 	def index
-		if user_signed_in?
-			current_user_id = current_user.id
-			flashcards = Flashcard.where(user_id: current_user_id)
-		else
-			flashcards = Flashcard.all
-		end
+		flashcards = Flashcard.all
+		# render json: flashcards, status: 200
 	end
 
 	def show
-		current_user_id = current_user.id
-		my_flashcards = flashcards.where(user_id: current_user_id)
 	end
 
 	def create
