@@ -17,6 +17,7 @@ import {
 
 //Routes
 import Landing from './Landing'
+import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
 import UserProfile from './UserProfile'
 import UsersSession from './UsersSession'
@@ -44,11 +45,13 @@ export default class Routes extends React.Component {
   }
 
   render () {
-    const { 
+    const {
       userLoggedIn,
       userSignInRoute,
       userSignOutRoute,
     } = this.props
+
+    const { flashcards } = this.state
 
     return (
       <React.Fragment>
@@ -103,7 +106,27 @@ export default class Routes extends React.Component {
         <Switch>
           <Route exact path="/" component={ Landing } />
 
-          <Route path="/flashcards/myflashcards" component={ MyFlashcards } />
+          <Route
+            path="/flashcards"
+            render={
+              (props) =>
+              <Flashcards
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/myflashcards"
+            render={
+              (props) =>
+              <MyFlashcards
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
 
           <Route path="/myprofile" component={ UserProfile } />
 

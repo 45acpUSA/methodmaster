@@ -1,7 +1,7 @@
 class FlashcardsController < ApplicationController
 	before_action :authenticate_user!, except: %i[index]
 	before_action :load_flashcard, except: %i[index create]
-
+	
 	def index
 		flashcards = Flashcard.all
 		render json: flashcards, status: 200
