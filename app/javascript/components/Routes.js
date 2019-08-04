@@ -26,7 +26,8 @@ export default class Routes extends React.Component {
     super(props)
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      flashcards: [],
     }
   }
 
@@ -36,12 +37,19 @@ export default class Routes extends React.Component {
     })
   }
 
+  componentDidMount = () => {
+    fetch('/flashcards.json')
+      .then(resp => resp.json())
+      .then(data => this.setState({ flashcards: data }))
+  }
+
   render () {
     const { 
       userLoggedIn,
       userSignInRoute,
       userSignOutRoute,
     } = this.props
+
     return (
       <React.Fragment>
         <Navbar color="light" light expand="md">
@@ -54,19 +62,24 @@ export default class Routes extends React.Component {
                   Flashcards
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
+                  <DropdownItem href="#">
                     Languages
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem href="#">
                     Difficulty
                   </DropdownItem>
-                  <DropdownItem>
+                  <DropdownItem href="#">
                     Data Type
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
+                  <DropdownItem href="#">
                     All
                   </DropdownItem>
+                  {userLoggedIn &&
+                    <DropdownItem href="#">
+                      My Flashcards
+                    </DropdownItem>
+                  }
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
