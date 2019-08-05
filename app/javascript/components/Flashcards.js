@@ -17,7 +17,8 @@ export default class Flashcards extends React.Component {
   }
 
   handleChange = event =>{
-    const { attributes } = this.state  
+    const { attributes } = this.state
+    const { flashcards } = this.props
     attributes[event.target.name] = event.target.value
     this.setState({ attributes })
   }
@@ -69,14 +70,14 @@ export default class Flashcards extends React.Component {
     })
   }
 
-  flashcards = () => {
+  filteredFlashcards = () => {
     const { flashcards } = this.props
     const { language, dataType, difficulty } = this.state.attributes
-    return flashcards.filter(flashcard => {
+    return flashcards.map(flashcard => {
       if (
         language.toLowerCase() === flashcard.language.toLowerCase() &&
-        dataType.toLowerCase() === flashcard.language.toLowerCase() &&
-        difficulty.toLowerCase() === flashcard.language.toLowerCase() )
+        dataType.toLowerCase() === flashcard.data_type.toLowerCase() &&
+        difficulty.toLowerCase() === flashcard.difficulty.toLowerCase() )
       {
         return(
           <div key={flashcard.id}>
@@ -110,7 +111,7 @@ export default class Flashcards extends React.Component {
               onChange={this.handleChange}
               value = {attributes.language}
             >
-              <option></option>
+              <option>Select...</option>
               <option>JavaScript</option>
               <option>Ruby</option>
               <option>Python</option>
@@ -125,9 +126,9 @@ export default class Flashcards extends React.Component {
               onChange={this.handleChange}
               value = {attributes.dataType}
             >
-              <option></option>
+              <option>Select...</option>
               <option>String</option>
-              <option>Number/Integer</option>
+              <option>Number</option>
               <option>Array</option>
               <option>Regex</option>
             </Input>
@@ -140,23 +141,13 @@ export default class Flashcards extends React.Component {
               onChange={this.handleChange}
               value = {attributes.difficulty}
             >
-              <option></option>
+              <option>Select...</option>
               <option>Easy</option>
               <option>Medium</option>
               <option>Hard</option>
             </Input>
           </FormGroup>
 
-          <div>
-            <div className="estBtnWrap">
-              <Button onClick={this.flashcards()}>Submit</Button>
-            </div>
-            <Link to='/flashcards' id="cancelBtn">Cancel</Link>
-          </div>
-
-        </div>
-        <div>
-          {this.flashcards()}
         </div>
         <br />
         <br />
@@ -164,6 +155,11 @@ export default class Flashcards extends React.Component {
         {(attributes.language.length === 0 && attributes.dataType.length === 0 && attributes.difficulty.length === 0) &&
           <div>
             {this.allCards()}
+          </div>
+        }
+        {(attributes.language.length > 0 || attributes.dataType.length > 0 || attributes.difficulty.length > 0) &&
+          <div>
+            {this.filteredFlashcards()}
           </div>
         }
       </React.Fragment>
