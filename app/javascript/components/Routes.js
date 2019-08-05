@@ -16,7 +16,10 @@ import {
 } from 'reactstrap'
 
 //Routes
+import DataType from './DataType'
+import Difficulty from './Difficulty'
 import Landing from './Landing'
+import Language from './Language'
 import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
 import UserProfile from './UserProfile'
@@ -118,9 +121,42 @@ export default class Routes extends React.Component {
           />
 
           <Route
+            path="/language"
+            render={
+              props =>
+              <Languages
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/datatype"
+            render={
+              props =>
+              <DataType
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/difficulty"
+            render={
+              props =>
+              <Difficulty
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
             path="/myflashcards"
             render={
-              (props) =>
+              props =>
               <MyFlashcards
                 {...props}
                 flashcards={ flashcards }
@@ -133,7 +169,7 @@ export default class Routes extends React.Component {
           <Route
             path="/users/session"
             render={
-              (props) => 
+              props => 
               <UsersSession
                 {...props}
                 userLoggedIn = { userLoggedIn }
