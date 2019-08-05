@@ -1,9 +1,26 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from 'react-router-dom'
 import { Button, Card, CardHeader, CardText, CardBody, CardLink,
-  CardTitle, CardSubtitle } from 'reactstrap'
+  CardTitle, CardSubtitle, FormGroup, Input, Label } from 'reactstrap'
 
 export default class Flashcards extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      attributes: {
+        language: '',
+        dataType: '',
+        difficulty: '',
+      }
+    }
+  }
+
+  handleChange = event =>{
+    const { attributes } = this.state  
+    attributes[event.target.name] = event.target.value
+    this.setState({ attributes })
+  }
 
   randomAnswers = flashcard => {
     let answers = [flashcard.correct_answer, flashcard.incorrect_answer1, flashcard.incorrect_answer2, flashcard.incorrect_answer3]
@@ -31,14 +48,15 @@ export default class Flashcards extends React.Component {
     )
   }
 
-  flashcards = () => {
-    const { flashcards } = this.props
+  allCards = () => {
+    const { flashcards } =this.props
     return flashcards.map(flashcard => {
-      return (
+      return(
         <div key={flashcard.id}>
           <Card>
             <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
+              <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
               <CardTitle>{flashcard.difficulty.toUpperCase()}</CardTitle>
               <CardSubtitle>{flashcard.question}</CardSubtitle>
             </CardBody>
@@ -51,15 +69,103 @@ export default class Flashcards extends React.Component {
     })
   }
 
+  flashcards = () => {
+    const { flashcards } = this.props
+    const { language, dataType, difficulty } = this.state.attributes
+    return flashcards.filter(flashcard => {
+      if (
+        language.toLowerCase() === flashcard.language.toLowerCase() &&
+        dataType.toLowerCase() === flashcard.language.toLowerCase() &&
+        difficulty.toLowerCase() === flashcard.language.toLowerCase() )
+      {
+        return(
+          <div key={flashcard.id}>
+            <Card>
+              <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
+              <CardBody>
+                <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
+                <CardTitle>{flashcard.difficulty.toUpperCase()}</CardTitle>
+                <CardSubtitle>{flashcard.question}</CardSubtitle>
+              </CardBody>
+              <CardBody>
+                {this.randomAnswers(flashcard)}
+              </CardBody>
+            </Card>
+          </div>
+        )
+      }
+    })
+  }
+
   render () {
+    const { attributes } = this.state
     return (
       <React.Fragment>
         <div>
-          <Button href="#languages">Languages</Button>
-          <Button href="#datatype">Data Type</Button>
-          <Button href="#difficulty">Difficulty</Button>
+          <FormGroup>
+            <Label for="language">Language</Label>
+            <Input 
+              type="select" 
+              name="language" 
+              onChange={this.handleChange}
+              value = {attributes.language}
+            >
+              <option></option>
+              <option>JavaScript</option>
+              <option>Ruby</option>
+              <option>Python</option>
+              <option>C++</option>
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="dataType">Data Type</Label>
+            <Input 
+              type="select" 
+              name="dataType" 
+              onChange={this.handleChange}
+              value = {attributes.dataType}
+            >
+              <option></option>
+              <option>String</option>
+              <option>Number/Integer</option>
+              <option>Array</option>
+              <option>Regex</option>
+            </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for="difficulty">Difficulty</Label>
+            <Input 
+              type="select" 
+              name="difficulty" 
+              onChange={this.handleChange}
+              value = {attributes.difficulty}
+            >
+              <option></option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </Input>
+          </FormGroup>
+
+          <div>
+            <div className="estBtnWrap">
+              <Button onClick={this.flashcards()}>Submit</Button>
+            </div>
+            <Link to='/flashcards' id="cancelBtn">Cancel</Link>
+          </div>
+
         </div>
-        {this.flashcards()}
+        <div>
+          {this.flashcards()}
+        </div>
+        <br />
+        <br />
+        <br />
+        {(attributes.language.length === 0 && attributes.dataType.length === 0 && attributes.difficulty.length === 0) &&
+          <div>
+            {this.allCards()}
+          </div>
+        }
       </React.Fragment>
     );
   }

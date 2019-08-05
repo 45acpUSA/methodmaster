@@ -23,7 +23,6 @@ export default class MyFlashcards extends React.Component {
   myFlashcards = () => {
     const { flashcards } = this.props
     return flashcards.map(flashcard => {
-      // if () {
         return (
           <div key={flashcard.id}>
             <Card>
@@ -40,7 +39,6 @@ export default class MyFlashcards extends React.Component {
             </Card>
           </div>
         )
-      // }
     })
   }
   

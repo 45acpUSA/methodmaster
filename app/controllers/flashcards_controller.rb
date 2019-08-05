@@ -23,7 +23,7 @@ class FlashcardsController < ApplicationController
 	end
 
 	def update
-		if flashcard.update(flashcard_params)
+		if current_user.flashcards.update(flashcard_params)
 			redirect_to action: 'index'
 		else
 			render :edit
@@ -31,7 +31,8 @@ class FlashcardsController < ApplicationController
 	end
 
 	def destroy
-		flashcard.destroy
+		current_user.flashcards.destroy
+		redirect_to action: 'index'
 	end
 
 	private

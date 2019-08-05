@@ -22,6 +22,7 @@ import Landing from './Landing'
 import Language from './Language'
 import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
+import SingleFlashcard from './SingleFlashcard'
 import UserProfile from './UserProfile'
 import UsersSession from './UsersSession'
 
@@ -78,7 +79,7 @@ export default class Routes extends React.Component {
                     Data Type
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem href="#">
+                  <DropdownItem href="#flashcards">
                     All
                   </DropdownItem>
                   {userLoggedIn &&
@@ -147,6 +148,17 @@ export default class Routes extends React.Component {
             render={
               props =>
               <Difficulty
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/flashcards/:id"
+            render={
+              props =>
+              <SingleFlashcard
                 {...props}
                 flashcards={ flashcards }
               />
