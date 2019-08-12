@@ -16,10 +16,7 @@ import {
 } from 'reactstrap'
 
 //Routes
-import DataType from './DataType'
-import Difficulty from './Difficulty'
 import Landing from './Landing'
-import Language from './Language'
 import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
 import SingleFlashcard from './SingleFlashcard'
@@ -115,39 +112,6 @@ export default class Routes extends React.Component {
             render={
               (props) =>
               <Flashcards
-                {...props}
-                flashcards={ flashcards }
-              />
-            }
-          />
-
-          <Route
-            path="/language"
-            render={
-              props =>
-              <Languages
-                {...props}
-                flashcards={ flashcards }
-              />
-            }
-          />
-
-          <Route
-            path="/datatype"
-            render={
-              props =>
-              <DataType
-                {...props}
-                flashcards={ flashcards }
-              />
-            }
-          />
-
-          <Route
-            path="/difficulty"
-            render={
-              props =>
-              <Difficulty
                 {...props}
                 flashcards={ flashcards }
               />
