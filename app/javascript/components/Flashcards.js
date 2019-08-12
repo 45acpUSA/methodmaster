@@ -7,21 +7,74 @@ import { Button, Card, CardHeader, CardText, CardBody, CardLink,
 export default class Flashcards extends React.Component {
   constructor(props){
     super(props)
+    const { match } = this.props
     this.state = {
       attributes: {
         language: '',
         dataType: '',
         difficulty: '',
-      }
+      },
+      // correctCount: 0,
+      // incorrectCount: 0,
+      // style: {
+      //   background-color: #F0F8FF,
+      // },
     }
   }
 
-  handleChange = event =>{
+  handleChange = event => {
     const { attributes } = this.state
-    const { flashcards } = this.props
     attributes[event.target.name] = event.target.value
     this.setState({ attributes })
   }
+
+  // handleClick = (flashcard, rand) => {
+  //   if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
+  //     return (
+  //       this.setState({
+  //         correctCount: this.state.correctCount ++,
+  //         style: {
+  //           background-color: #008000,
+  //         }
+  //       })
+  //     )
+  //   } else {
+  //     return (
+  //       this.setState({
+  //         incorrectCount: this.state.incorrectCount ++,
+  //         style: {
+  //           background-color: #FF0000,
+  //         }
+  //       })
+  //     )
+  //   }
+  // }
+
+
+  handleClick = (flashcard, rand) => {
+    if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
+      
+    }
+  }
+
+  // handleCorrectCount = prevState => {
+  //   const { correctCount } = this.state
+  //   const { match } = this.props
+  //   const prevMatch = prevState.match
+  //   if (match.params.correctCount != prevMatch.params.correctCount) {
+  //     alert('Correct!')
+  //   } else if (correctCount >= 5) {
+  //     alert("You're on a roll!")
+  //   }
+  // }
+
+  // handleIncorrectCount = prevState => {
+  //   const { match } = this.props
+  //   const prevMatch = prevState.match
+  //   if (match.params.incorrectCount != prevMatch.params.incorrectCount) {
+  //     alert('Not Quite')
+  //   }
+  // }
 
   randomAnswers = flashcard => {
     let answers = [flashcard.correct_answer, flashcard.incorrect_answer1, flashcard.incorrect_answer2, flashcard.incorrect_answer3]
@@ -39,14 +92,13 @@ export default class Flashcards extends React.Component {
       randomizedAnswers.push(answers[0])
       answers.splice(0, 1)
     }
-    return(
-      <div>
-        <Button>{randomizedAnswers[0]}</Button>
-        <Button>{randomizedAnswers[1]}</Button>
-        <Button>{randomizedAnswers[2]}</Button>
-        <Button>{randomizedAnswers[3]}</Button>
-      </div>
-    )
+    return randomizedAnswers.map((rand, index) => {
+      return(
+        <div key={index}>
+          <Button onClick={() => {this.handleClick(flashcard, rand)} }> {rand} </Button>
+        </div>
+      )
+    })
   }
 
   allCards = () => {
