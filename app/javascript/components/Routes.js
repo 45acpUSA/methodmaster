@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Route, Switch, Link } from 'react-router-dom'
 import {
   Collapse,
@@ -30,6 +29,7 @@ export default class Routes extends React.Component {
     this.state = {
       isOpen: false,
       flashcards: [],
+      // myFlashcards: [],
     }
   }
 
@@ -45,8 +45,22 @@ export default class Routes extends React.Component {
       .then(data => this.setState({ flashcards: data }))
   }
 
+  // componentDidMount = () => {
+  //   Promise.all([fetch('/flashcards.json'), fetch('/my_flashcards.json')])
+  //     .then(([response1, response2]) => {
+  //       return Promise.all([response1.json(), response2.json()])
+  //     })
+  //     .then(([data1, data2]) => {
+  //       this.setState({
+  //         flashcards: data1,
+  //         myFlashcards: data2
+  //       })
+  //     })
+  // }
+
   render () {
     const {
+      currentUser,
       userLoggedIn,
       userSignInRoute,
       userSignOutRoute,
@@ -80,7 +94,7 @@ export default class Routes extends React.Component {
                     All
                   </DropdownItem>
                   {userLoggedIn &&
-                    <DropdownItem href="#">
+                    <DropdownItem href={`#users/${currentUser.id}/flashcards`}>
                       My Flashcards
                     </DropdownItem>
                   }
@@ -105,7 +119,7 @@ export default class Routes extends React.Component {
 
 
         <Switch>
-          <Route exact path="/" component={ Landing } />
+          <Route exact path="/" component = { Landing } />
 
           <Route
             path="/flashcards"
@@ -113,7 +127,7 @@ export default class Routes extends React.Component {
               (props) =>
               <Flashcards
                 {...props}
-                flashcards={ flashcards }
+                flashcards = { flashcards }
               />
             }
           />
@@ -124,36 +138,38 @@ export default class Routes extends React.Component {
               props =>
               <SingleFlashcard
                 {...props}
-                flashcards={ flashcards }
+                flashcards = { flashcards }
               />
             }
           />
 
           <Route
-            path="/myflashcards"
+            path="/users/:user_id/flashcards"
             render={
               props =>
               <MyFlashcards
                 {...props}
-                flashcards={ flashcards }
+                currentUser = { currentUser }
+                flashcards = { flashcards }
               />
             }
           />
-
-          <Route path="/myprofile" component={ UserProfile } />
 
           <Route
             path="/users/session"
             render={
               props => 
               <UsersSession
-                {...props}
-                userLoggedIn = { userLoggedIn }
-                userSignInRoute = { userSignInRoute }
-                userSignOutRoute = { userSignOutRoute }
+              {...props}
+              userLoggedIn = { userLoggedIn }
+              userSignInRoute = { userSignInRoute }
+              userSignOutRoute = { userSignOutRoute }
               />
             }
           />
+
+          <Route path="/users/:id" component={ UserProfile } />
+
         </Switch>
       </React.Fragment>
     );

@@ -6,6 +6,7 @@ import Routes from './Routes'
 class App extends React.Component {
   render () {
     const {
+      user,
       user_logged_in,
       user_sign_in_route,
       user_sign_out_route,
@@ -14,9 +15,10 @@ class App extends React.Component {
       <React.Fragment>
         <Router>
           <Routes
-            userLoggedIn={ user_logged_in }
-            userSignInRoute={ user_sign_in_route }
-            userSignOutRoute={ user_sign_out_route }
+            currentUser = { user }
+            userLoggedIn = { user_logged_in }
+            userSignInRoute = { user_sign_in_route }
+            userSignOutRoute = { user_sign_out_route }
           />
         </Router>
       </React.Fragment>

@@ -1,28 +1,13 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Button, Card, CardHeader, CardText, CardBody, CardLink,
   CardTitle, CardSubtitle } from 'reactstrap'
 
 export default class MyFlashcards extends React.Component {
-  // constructor(props){
-  //   super(props)
-  //   const { match } = this.props
-  //   this.state = {
-  //     userId: match.params.id,
-  //   }
-  // }
-
-  // componentDidUpdate = prevProps => {
-  //   const prevMatch = prevProps.match
-  //   const { match } = this.props
-  //   if (match.params.id != prevMatch.params.id) {
-  //     this.setState({ userId: match.params.id })
-  //   }
-  // }
   
   myFlashcards = () => {
-    const { flashcards } = this.props
+    const { currentUser, flashcards } = this.props
     return flashcards.map(flashcard => {
+      if (flashcard.user_id == currentUser.id) {
         return (
           <div key={flashcard.id}>
             <Card>
@@ -39,6 +24,7 @@ export default class MyFlashcards extends React.Component {
             </Card>
           </div>
         )
+      }
     })
   }
   

@@ -7,13 +7,15 @@ import { Button, Card, CardHeader, CardText, CardBody, CardLink,
 export default class Flashcards extends React.Component {
   constructor(props){
     super(props)
-    const { match } = this.props
+    const { flashcards } = this.props
     this.state = {
       attributes: {
         language: '',
         dataType: '',
         difficulty: '',
       },
+      correctCards: [],
+      incorrectCards: [],
       // correctCount: 0,
       // incorrectCount: 0,
       // style: {
@@ -51,11 +53,12 @@ export default class Flashcards extends React.Component {
   // }
 
 
-  handleClick = (flashcard, rand) => {
-    if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
+  // handleClick = (flashcard, rand) => {
+  //   const { correctCards, incorrectCards } = this.state
+  //   if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
       
-    }
-  }
+  //   }
+  // }
 
   // handleCorrectCount = prevState => {
   //   const { correctCount } = this.state
@@ -102,7 +105,7 @@ export default class Flashcards extends React.Component {
   }
 
   allCards = () => {
-    const { flashcards } =this.props
+    const { flashcards } = this.props
     return flashcards.map(flashcard => {
       return(
         <div key={flashcard.id}>
@@ -199,11 +202,12 @@ export default class Flashcards extends React.Component {
               <option>Hard</option>
             </Input>
           </FormGroup>
-
         </div>
+
         <br />
         <br />
         <br />
+        
         {(attributes.language.length === 0 && attributes.dataType.length === 0 && attributes.difficulty.length === 0) &&
           <div>
             {this.allCards()}

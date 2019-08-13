@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   
   get '*path', :to => 'flashcards#root', constraints: -> (request){ request.format.html? }
   
-  resources :flashcards
+  resources :users do
+    resources :flashcards
+    # get 'my_flashcards', :to => 'flashcards#my_flashcards'
+  end
+  
+  resources :flashcards, only: %i[index]
 
   root :to => 'welcome#index'
 end
