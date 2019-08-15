@@ -185,7 +185,13 @@ export default class Flashcards extends React.Component {
               <option>String</option>
               <option>Number</option>
               <option>Array</option>
-              <option>Regex</option>
+              <option>Object</option>
+              <option>Math</option>
+              <option>Date</option>
+              <option>RegEx</option>
+              <option>Operators</option>
+              <option>Statements</option>
+              <option>Boolean</option>
             </Input>
           </FormGroup>
           <FormGroup>
@@ -207,7 +213,7 @@ export default class Flashcards extends React.Component {
         <br />
         <br />
         <br />
-        
+
         {(attributes.language.length === 0 && attributes.dataType.length === 0 && attributes.difficulty.length === 0) &&
           <div>
             {this.allCards()}

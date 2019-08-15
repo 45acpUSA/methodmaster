@@ -10,6 +10,9 @@ class FlashcardsController < ApplicationController
 	def show
 	end
 
+	def new
+	end
+
 	def create
 		flashcard = current_user.flashcards.new(flashcard_params)
 		if flashcard.save

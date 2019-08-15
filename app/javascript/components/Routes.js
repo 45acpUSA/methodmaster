@@ -18,6 +18,7 @@ import {
 import Landing from './Landing'
 import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
+import NewFlashcard from './NewFlashcard'
 import SingleFlashcard from './SingleFlashcard'
 import UserProfile from './UserProfile'
 import UsersSession from './UsersSession'
@@ -42,6 +43,20 @@ export default class Routes extends React.Component {
     fetch('/flashcards.json')
       .then(resp => resp.json())
       .then(data => this.setState({ flashcards: data }))
+  }
+
+  handleNewFlashcard = newFlashcardInfo => {
+    return fetch("/users/:user_id/flashcards.json", {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(newFlashcardInfo)
+    })
+    .then(resp => {
+      let json = resp.json()
+      return json
+    })
   }
 
   render () {
@@ -106,7 +121,7 @@ export default class Routes extends React.Component {
                     <DropdownItem href={`#users/${currentUser.id}/flashcards`}>
                       My Flashcards
                     </DropdownItem>
-                    <DropdownItem href="#">
+                    <DropdownItem href={`#users/${currentUser.id}/newflashcard`}>
                       Create Flashcards
                     </DropdownItem>
                     <DropdownItem divider />
@@ -122,7 +137,7 @@ export default class Routes extends React.Component {
 
 
         <Switch>
-          <Route exact path="/" component = { Landing } />
+          <Route exact path="/" component={ Landing } />
 
           <Route
             path="/flashcards"
@@ -130,7 +145,7 @@ export default class Routes extends React.Component {
               (props) =>
               <Flashcards
                 {...props}
-                flashcards = { flashcards }
+                flashcards={ flashcards }
               />
             }
           />
@@ -141,7 +156,7 @@ export default class Routes extends React.Component {
               props =>
               <SingleFlashcard
                 {...props}
-                flashcards = { flashcards }
+                flashcards={ flashcards }
               />
             }
           />
@@ -152,8 +167,21 @@ export default class Routes extends React.Component {
               props =>
               <MyFlashcards
                 {...props}
-                currentUser = { currentUser }
-                flashcards = { flashcards }
+                componentDidMount={ this.componentDidMount }
+                currentUser={ currentUser }
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/users/:user_id/newflashcard"
+            render={
+              props =>
+              <NewFlashcard
+                {...props}
+                currentUser={ currentUser }
+                handleNewFlashcard={ this.handleNewFlashcard }
               />
             }
           />
@@ -164,9 +192,9 @@ export default class Routes extends React.Component {
               props => 
               <UsersSession
               {...props}
-              userLoggedIn = { userLoggedIn }
-              userSignInRoute = { userSignInRoute }
-              userSignOutRoute = { userSignOutRoute }
+              userLoggedIn={ userLoggedIn }
+              userSignInRoute={ userSignInRoute }
+              userSignOutRoute={ userSignOutRoute }
               />
             }
           />
