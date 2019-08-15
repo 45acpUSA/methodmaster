@@ -29,7 +29,6 @@ export default class Routes extends React.Component {
     this.state = {
       isOpen: false,
       flashcards: [],
-      // myFlashcards: [],
     }
   }
 
@@ -44,19 +43,6 @@ export default class Routes extends React.Component {
       .then(resp => resp.json())
       .then(data => this.setState({ flashcards: data }))
   }
-
-  // componentDidMount = () => {
-  //   Promise.all([fetch('/flashcards.json'), fetch('/my_flashcards.json')])
-  //     .then(([response1, response2]) => {
-  //       return Promise.all([response1.json(), response2.json()])
-  //     })
-  //     .then(([data1, data2]) => {
-  //       this.setState({
-  //         flashcards: data1,
-  //         myFlashcards: data2
-  //       })
-  //     })
-  // }
 
   render () {
     const {
@@ -109,9 +95,26 @@ export default class Routes extends React.Component {
                 </NavItem>
               }
               {userLoggedIn &&
-                <NavItem>
-                  <NavLink href="#users/session">Sign Out</NavLink>
-                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    {currentUser.email}
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem href="#">
+                      My Profile
+                    </DropdownItem>
+                    <DropdownItem href={`#users/${currentUser.id}/flashcards`}>
+                      My Flashcards
+                    </DropdownItem>
+                    <DropdownItem href="#">
+                      Create Flashcards
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem href="#users/session">
+                      Sign Out
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               }
             </Nav>
           </Collapse>
