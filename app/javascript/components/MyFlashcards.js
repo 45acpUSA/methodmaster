@@ -1,4 +1,5 @@
 import React from "react"
+import '../../assets/stylesheets/MyFlashcards.scss'
 import { Button, Card, CardHeader, CardText, CardBody, CardLink,
   CardTitle, CardSubtitle } from 'reactstrap'
 
@@ -8,12 +9,23 @@ export default class MyFlashcards extends React.Component {
     this.state = {
       myFlashcards: [],
     }
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount = () => {
     fetch('/users/:user_id/flashcards.json')
       .then(resp => resp.json())
       .then(data => this.setState({ myFlashcards: data }))
+  }
+
+  handleDelete = flashcard => {
+    console.log(flashcard.id)
+    fetch(`/flashcards/${flashcard.id}`, {
+      method: "DELETE"
+    })
+    .then(response => {
+      response.json()
+    })
   }
 
   randomAnswers = flashcard => {
@@ -57,6 +69,10 @@ export default class MyFlashcards extends React.Component {
             <CardBody>
               {this.randomAnswers(flashcard)}
             </CardBody>
+            <br />
+            <hr />
+            <Button id="myCardEditButton" color="primary">Edit</Button>
+            <Button id="myCardDeleteButton" color="danger" onClick={() => this.handleDelete(flashcard)}>Delete</Button>
           </Card>
         )
       }

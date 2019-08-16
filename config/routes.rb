@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :flashcards
   end
   
-  resources :flashcards, only: %i[index]
+  resources :flashcards, only: %i[index destroy]
 
   root :to => 'welcome#index'
 end
