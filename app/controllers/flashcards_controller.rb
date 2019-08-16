@@ -34,8 +34,12 @@ class FlashcardsController < ApplicationController
 	end
 
 	def destroy
-		current_user.flashcards.destroy
-		redirect_to action: 'index'
+		flashcard = Flashcard.find(params[:id])
+		if flashcard.destroy
+			redirect_to action: "index"
+		else
+			redirect_back fallback_location: users_flashcards_path
+		end
 	end
 
 	private

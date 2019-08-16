@@ -148,14 +148,13 @@ export default class Routes extends React.Component {
           />
 
           <Route
-            path="/users/:user_id/flashcards"
+            path={`/users/${currentUser.id}/flashcards`}
             render={
               props =>
               <MyFlashcards
                 {...props}
                 componentDidMount={ this.componentDidMount }
                 currentUser={ currentUser }
-                flashcards={ flashcards }
               />
             }
           />

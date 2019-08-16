@@ -15,10 +15,10 @@ class App extends React.Component {
       <React.Fragment>
         <Router>
           <Routes
-            currentUser = { user }
-            userLoggedIn = { user_logged_in }
-            userSignInRoute = { user_sign_in_route }
-            userSignOutRoute = { user_sign_out_route }
+            currentUser={ user }
+            userLoggedIn={ user_logged_in }
+            userSignInRoute={ user_sign_in_route }
+            userSignOutRoute={ user_sign_out_route }
           />
         </Router>
       </React.Fragment>

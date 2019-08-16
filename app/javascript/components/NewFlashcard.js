@@ -1,5 +1,5 @@
 import React from "react"
-import '../../assets/stylesheets/newFlashcardForm.scss'
+import '../../assets/stylesheets/NewFlashcard.scss'
 import { Link, Redirect } from 'react-router-dom'
 import { Button, FormGroup, Label, Input } from 'reactstrap'
 
