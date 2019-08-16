@@ -45,20 +45,6 @@ export default class Routes extends React.Component {
       .then(data => this.setState({ flashcards: data }))
   }
 
-  handleNewFlashcard = newFlashcardInfo => {
-    return fetch("/users/:user_id/flashcards.json", {
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(newFlashcardInfo)
-    })
-    .then(resp => {
-      let json = resp.json()
-      return json
-    })
-  }
-
   render () {
     const {
       currentUser,

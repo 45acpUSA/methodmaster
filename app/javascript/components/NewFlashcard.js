@@ -18,6 +18,8 @@ export default class NewFlashcard extends React.Component {
       },
       success: false,
     }
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleClearForm = this.handleClearForm.bind(this)
   }
 
   handleChange = event =>{
@@ -26,13 +28,44 @@ export default class NewFlashcard extends React.Component {
     this.setState({ attributes })
   }
 
-  handleNewFlashcard = () => {
-    const { success } = this.state
-    const { handleNewFlashcard } = this.props
-    handleNewFlashcard(this.state.attributes)
-    let redirect = success === false ? true : false
-    this.setState({ success: redirect })
-  }
+  handleClearForm = event => {
+    event.preventDefault()
+    this.setState({ 
+      attributes: {
+        language: '',
+        data_type: '',
+        difficulty: '',
+        question: '',
+        correct_answer: '',
+        incorrect_answer1: '',
+        incorrect_answer2: '',
+        incorrect_answer3: ''
+      }
+    })
+}
+
+handleFormSubmit = event => {
+  event.preventDefault()
+  const { attributes, success } = this.state
+
+  fetch("/users/:user_id/flashcards.json", {
+    method: "POST",
+    body: JSON.stringify(attributes),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    response.json()
+    .then(data => {
+      console.log("Successful" + data)
+    })
+  })
+
+  let redirect = success === false ? true : false
+  this.setState({ success: redirect })
+}
 
   render () {
     const { attributes, success } = this.state
@@ -137,10 +170,11 @@ export default class NewFlashcard extends React.Component {
         </FormGroup>
         
         <div>
-          <Button onClick={ this.handleNewFlashcard }>Save</Button>
-          <Link to={`/users/${currentUser.id}/flashcards`}>Cancel</Link>
+          <Button id="newCardSaveButton" color="primary" onClick={ this.handleFormSubmit }>Save</Button>
         </div>
-
+        <div>
+          <Button id="newCardClearButton" color="secondary" onClick={ this.handleClearForm }>Clear</Button>
+        </div>
         {success &&
           <Redirect to={`/users/${currentUser.id}/flashcards`} />
         }

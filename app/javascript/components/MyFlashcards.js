@@ -3,10 +3,17 @@ import { Button, Card, CardHeader, CardText, CardBody, CardLink,
   CardTitle, CardSubtitle } from 'reactstrap'
 
 export default class MyFlashcards extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      myFlashcards: [],
+    }
+  }
 
   componentDidMount = () => {
-    const { componentDidMount } = this.props
-    componentDidMount()
+    fetch('/users/:user_id/flashcards.json')
+      .then(resp => resp.json())
+      .then(data => this.setState({ myFlashcards: data }))
   }
 
   randomAnswers = flashcard => {
@@ -35,12 +42,12 @@ export default class MyFlashcards extends React.Component {
   }
   
   myFlashcards = () => {
-    const { currentUser, flashcards } = this.props
-    return flashcards.map(flashcard => {
+    const { myFlashcards } = this.state
+    const { currentUser } = this.props
+    return myFlashcards.map(flashcard => {
       if (flashcard.user_id == currentUser.id) {
         return (
-          <div key={flashcard.id}>
-          <Card>
+          <Card key={flashcard.id}>
             <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
               <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
@@ -51,7 +58,6 @@ export default class MyFlashcards extends React.Component {
               {this.randomAnswers(flashcard)}
             </CardBody>
           </Card>
-        </div>
         )
       }
     })
