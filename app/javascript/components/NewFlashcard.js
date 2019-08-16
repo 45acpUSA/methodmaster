@@ -1,4 +1,5 @@
 import React from "react"
+import '../../assets/stylesheets/newFlashcardForm.scss'
 import { Link, Redirect } from 'react-router-dom'
 import { Button, FormGroup, Label, Input } from 'reactstrap'
 
@@ -169,11 +170,16 @@ handleFormSubmit = event => {
           />
         </FormGroup>
         
+        <Button id="newCardSaveButton" color="primary" onClick={ this.handleFormSubmit }>Save</Button>
+        <Button id="newCardClearButton" color="secondary" onClick={ this.handleClearForm }>Clear</Button>
+        <br />
+        <br />
+        <hr />
         <div>
-          <Button id="newCardSaveButton" color="primary" onClick={ this.handleFormSubmit }>Save</Button>
+          <Link to={`/users/${currentUser.id}/flashcards`}>Return My Flashcards</Link>
         </div>
         <div>
-          <Button id="newCardClearButton" color="secondary" onClick={ this.handleClearForm }>Clear</Button>
+          <Link to='/#'>Return My Profile</Link>
         </div>
         {success &&
           <Redirect to={`/users/${currentUser.id}/flashcards`} />
