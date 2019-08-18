@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
-import { Button, Card, CardHeader, CardText, CardBody, CardLink,
+import { Button, Card, CardHeader, CardBody,
   CardTitle, CardSubtitle, FormGroup, Input, Label } from 'reactstrap'
 
 export default class Flashcards extends React.Component {
@@ -77,6 +77,15 @@ export default class Flashcards extends React.Component {
   //   if (match.params.incorrectCount != prevMatch.params.incorrectCount) {
   //     alert('Not Quite')
   //   }
+  // }
+
+  // languageOptions = () => {
+  //   const { flashcards } = this.props
+  //   return flashcards.all_languages.map(language => {
+  //     return(
+  //       <option>{language}</option>
+  //     )
+  //   })
   // }
 
   randomAnswers = flashcard => {
