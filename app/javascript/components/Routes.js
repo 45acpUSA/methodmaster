@@ -15,10 +15,15 @@ import {
 } from 'reactstrap'
 
 //Routes
+import CPlusPlus from './languages/CPlusPlus'
+import Javascript from './languages/Javascript'
 import Landing from './Landing'
+import LanguageSelector from './languages/LanguageSelector'
 import Flashcards from './Flashcards'
 import MyFlashcards from './MyFlashcards'
 import NewFlashcard from './NewFlashcard'
+import Python from './languages/Python'
+import Ruby from './languages/Ruby'
 import SingleFlashcard from './SingleFlashcard'
 import UserProfile from './UserProfile'
 import UsersSession from './UsersSession'
@@ -67,7 +72,7 @@ export default class Routes extends React.Component {
                   Flashcards
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="#">
+                  <DropdownItem href="#flashcards/languages/select">
                     Languages
                   </DropdownItem>
                   <DropdownItem href="#">
@@ -124,6 +129,61 @@ export default class Routes extends React.Component {
 
         <Switch>
           <Route exact path="/" component={ Landing } />
+
+          <Route
+            path="/flashcards/languages/select"
+            render={
+              props => 
+              <LanguageSelector
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/flashcards/languages/javascript"
+            render={
+              props =>
+              <Javascript
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/flashcards/languages/ruby"
+            render={
+              props =>
+              <Ruby
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/flashcards/languages/python"
+            render={
+              props =>
+              <Python
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
+
+          <Route
+            path="/flashcards/languages/cplusplus"
+            render={
+              props =>
+              <CPlusPlus
+                {...props}
+                flashcards={ flashcards }
+              />
+            }
+          />
 
           <Route
             path="/flashcards"
