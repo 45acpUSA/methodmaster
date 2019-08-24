@@ -94,25 +94,6 @@ export default class Flashcards extends React.Component {
     }
   }
 
-  // handleCorrectCount = prevState => {
-  //   const { correctCount } = this.state
-  //   const { match } = this.props
-  //   const prevMatch = prevState.match
-  //   if (match.params.correctCount != prevMatch.params.correctCount) {
-  //     alert('Correct!')
-  //   } else if (correctCount >= 5) {
-  //     alert("You're on a roll!")
-  //   }
-  // }
-
-  // handleIncorrectCount = prevState => {
-  //   const { match } = this.props
-  //   const prevMatch = prevState.match
-  //   if (match.params.incorrectCount != prevMatch.params.incorrectCount) {
-  //     alert('Not Quite')
-  //   }
-  // }
-
   // languageOptions = () => {
   //   const { flashcards } = this.props
   //   return flashcards.all_languages.map(language => {
