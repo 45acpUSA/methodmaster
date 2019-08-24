@@ -76,7 +76,7 @@ export default class Flashcards extends React.Component {
       console.log(this.state.correctCount)
       if (this.state.correctCount < 5) {
         alert("Correct!")
-      } else if (this.state.correctCount < 10) {
+      } else if (this.state.correctCount >= 5 && this.state.correctCount < 10) {
         alert("You're on a Roll!")
       }
       // return setTimeout(() => {return flashcards.splice(index, 1)}, 2000)
