@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
 import { Button, Card, CardHeader, CardBody,
   CardTitle, CardSubtitle, FormGroup, Input, Label } from 'reactstrap'
@@ -7,20 +6,17 @@ import { Button, Card, CardHeader, CardBody,
 export default class Flashcards extends React.Component {
   constructor(props){
     super(props)
-    const { flashcards } = this.props
     this.state = {
       attributes: {
         language: '',
         dataType: '',
         difficulty: '',
       },
-      correctCards: [],
-      incorrectCards: [],
-      // correctCount: 0,
-      // incorrectCount: 0,
-      // style: {
-      //   background-color: #F0F8FF,
-      // },
+      style: {
+        backgroundColor: 'blue',
+      },
+      correctCount: 0,
+      incorrectCount: 0,
     }
   }
 
@@ -53,12 +49,50 @@ export default class Flashcards extends React.Component {
   // }
 
 
-  // handleClick = (flashcard, rand) => {
-  //   const { correctCards, incorrectCards } = this.state
-  //   if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
-      
-  //   }
-  // }
+  handleClick = (flashcard, index, rand) => {
+    if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
+      flashcard.success = true
+      console.log(flashcard.success)
+      this.handleResponse(flashcard)
+    } else {
+      flashcard.success = false
+      this.handleResponse(flashcard)
+    }
+  }
+
+  handleResponse = (flashcard, index) => {
+    // const { flashcards } = this.props
+    const responses = ["Try Again", "Not Quite", "Not the Droid You're Looking For"]
+    const randomNum = () => Math.floor(Math.random() * 3)
+    if (flashcard.success === true) {
+      this.setState(state => {
+        return{
+          style: {
+            backgroundColor: 'green'
+          },
+          correctCount: state.correctCount ++
+        }
+      })
+      console.log(this.state.correctCount)
+      if (this.state.correctCount < 5) {
+        alert("Correct!")
+      } else if (this.state.correctCount < 10) {
+        alert("You're on a Roll!")
+      }
+      // return setTimeout(() => {return flashcards.splice(index, 1)}, 2000)
+    } else if (flashcard.success === false) {
+      this.setState(state => {
+        return{
+          style: {
+            backgroundColor: 'red'
+          },
+          incorrectCount: state.incorrectCount ++
+        }
+      })
+      console.log(this.state.incorrectCount)
+      alert(responses[randomNum()])
+    }
+  }
 
   // handleCorrectCount = prevState => {
   //   const { correctCount } = this.state
@@ -107,7 +141,7 @@ export default class Flashcards extends React.Component {
     return randomizedAnswers.map((rand, index) => {
       return(
         <div key={index}>
-          <Button onClick={() => {this.handleClick(flashcard, rand)} }> {rand} </Button>
+          <Button onClick={() => {this.handleClick(flashcard, index, rand)} }> {rand} </Button>
         </div>
       )
     })
@@ -116,9 +150,10 @@ export default class Flashcards extends React.Component {
   allCards = () => {
     const { flashcards } = this.props
     return flashcards.map(flashcard => {
+      let style = flashcard.success !== null ? this.state.style : { backgroundColor: 'blue' }
       return(
         <div key={flashcard.id}>
-          <Card>
+          <Card style={ style }>
             <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
               <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
