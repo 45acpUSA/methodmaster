@@ -27,7 +27,7 @@ class FlashcardsController < ApplicationController
 
 	def update
 		if current_user.flashcards.update(flashcard_params)
-			redirect_to action: 'index'
+			redirect_to users_flashcards_path
 		else
 			render :edit
 		end

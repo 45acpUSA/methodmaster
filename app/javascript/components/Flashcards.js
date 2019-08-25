@@ -26,37 +26,14 @@ export default class Flashcards extends React.Component {
     this.setState({ attributes })
   }
 
-  // handleClick = (flashcard, rand) => {
-  //   if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
-  //     return (
-  //       this.setState({
-  //         correctCount: this.state.correctCount ++,
-  //         style: {
-  //           background-color: #008000,
-  //         }
-  //       })
-  //     )
-  //   } else {
-  //     return (
-  //       this.setState({
-  //         incorrectCount: this.state.incorrectCount ++,
-  //         style: {
-  //           background-color: #FF0000,
-  //         }
-  //       })
-  //     )
-  //   }
-  // }
-
-
   handleClick = (flashcard, index, rand) => {
     if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
       flashcard.success = true
       console.log(flashcard.success)
-      this.handleResponse(flashcard)
+      this.handleResponse(flashcard, index)
     } else {
       flashcard.success = false
-      this.handleResponse(flashcard)
+      this.handleResponse(flashcard, index)
     }
   }
 
@@ -93,15 +70,6 @@ export default class Flashcards extends React.Component {
       alert(responses[randomNum()])
     }
   }
-
-  // languageOptions = () => {
-  //   const { flashcards } = this.props
-  //   return flashcards.all_languages.map(language => {
-  //     return(
-  //       <option>{language}</option>
-  //     )
-  //   })
-  // }
 
   randomAnswers = flashcard => {
     let answers = [flashcard.correct_answer, flashcard.incorrect_answer1, flashcard.incorrect_answer2, flashcard.incorrect_answer3]
