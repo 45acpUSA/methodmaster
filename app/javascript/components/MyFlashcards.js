@@ -8,6 +8,11 @@ export default class MyFlashcards extends React.Component {
     super(props)
     this.state = {
       myFlashcards: [],
+      style: {
+        backgroundColor: 'blue',
+      },
+      correctCount: 0,
+      incorrectCount: 0,
     }
     this.handleDelete = this.handleDelete.bind(this)
   }
@@ -26,6 +31,51 @@ export default class MyFlashcards extends React.Component {
     .then(response => {
       response.json()
     })
+  }
+
+  handleClick = (flashcard, index, rand) => {
+    if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
+      flashcard.success = true
+      console.log(flashcard.success)
+      this.handleResponse(flashcard, index)
+    } else {
+      flashcard.success = false
+      this.handleResponse(flashcard, index)
+    }
+  }
+
+  handleResponse = (flashcard, index) => {
+    // const { flashcards } = this.props
+    const responses = ["Try Again", "Not Quite", "Not the Droid You're Looking For"]
+    const randomNum = () => Math.floor(Math.random() * 3)
+    if (flashcard.success === true) {
+      this.setState(state => {
+        return{
+          style: {
+            backgroundColor: 'green'
+          },
+          correctCount: state.correctCount ++
+        }
+      })
+      console.log(this.state.correctCount)
+      if (this.state.correctCount < 5) {
+        alert("Correct!")
+      } else if (this.state.correctCount >= 5 && this.state.correctCount < 10) {
+        alert("You're on a Roll!")
+      }
+      // return setTimeout(() => {return flashcards.splice(index, 1)}, 2000)
+    } else if (flashcard.success === false) {
+      this.setState(state => {
+        return{
+          style: {
+            backgroundColor: 'red'
+          },
+          incorrectCount: state.incorrectCount ++
+        }
+      })
+      console.log(this.state.incorrectCount)
+      alert(responses[randomNum()])
+    }
   }
 
   randomAnswers = flashcard => {
