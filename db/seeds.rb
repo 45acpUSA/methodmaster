@@ -5,14 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(
-  email: admin@test.com,
-  encrypted_password: 'testing123'
-)
-User.create(
-  email: admin2@test.com,
-  encrypted_password: 'testing123'
-)
 
 Flashcard.create(
   user_id: 1,
