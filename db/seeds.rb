@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create(
   email: admin@test.com,
-  password: 'testing123'
+  encrypted_password: 'testing123'
 )
 User.create(
   email: admin2@test.com,
-  password: 'testing123'
+  encrypted_password: 'testing123'
 )
 
 Flashcard.create(
