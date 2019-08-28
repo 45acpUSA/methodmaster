@@ -220,13 +220,24 @@ export default class Routes extends React.Component {
           />
 
           <Route
-            path="/users/:user_id/newflashcard"
+            path={`/users/${currentUser.id}/newflashcard`}
             render={
               props =>
               <NewFlashcard
                 {...props}
                 currentUser={ currentUser }
                 handleNewFlashcard={ this.handleNewFlashcard }
+              />
+            }
+          />
+
+          <Route
+            path={`/users/${currentUser.id}/editflashcard`}
+            render={
+              props =>
+              <EditFlashcard
+                {...props}
+                flashcards={ flashcards }
               />
             }
           />
