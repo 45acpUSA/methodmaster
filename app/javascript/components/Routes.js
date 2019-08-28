@@ -215,6 +215,7 @@ export default class Routes extends React.Component {
                 {...props}
                 componentDidMount={ this.componentDidMount }
                 currentUser={ currentUser }
+                userSignInRoute={ userSignInRoute }
               />
             }
           />

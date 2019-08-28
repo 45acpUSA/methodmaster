@@ -130,9 +130,18 @@ export default class MyFlashcards extends React.Component {
   }
   
   render () {
+    const { currentUser, userSignInRoute } = this.props
     return (
       <React.Fragment>
-        {this.myFlashcards()}
+        {currentUser && 
+          this.myFlashcards()
+        }
+        {!currentUser &&
+          <div>
+            <h3>Whoa, you're not logged in! Please Log In to see your cards!</h3>
+            <a href={ userSignInRoute }> Log In </a>
+          </div>
+        }
       </React.Fragment>
     );
   }
