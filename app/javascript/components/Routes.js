@@ -208,7 +208,7 @@ export default class Routes extends React.Component {
           />
 
           <Route
-            path={`/users/${currentUser.id}/flashcards`}
+            path={`/users/:user_id/flashcards`}
             render={
               props =>
               <MyFlashcards
@@ -220,7 +220,7 @@ export default class Routes extends React.Component {
           />
 
           <Route
-            path={`/users/${currentUser.id}/newflashcard`}
+            path={`/users/:user_id/newflashcard`}
             render={
               props =>
               <NewFlashcard
@@ -232,7 +232,7 @@ export default class Routes extends React.Component {
           />
 
           <Route
-            path={`/users/${currentUser.id}/editflashcard`}
+            path={`/users/:user_id/editflashcard`}
             render={
               props =>
               <EditFlashcard
