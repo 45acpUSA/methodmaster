@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap'
+import '../../assets/stylesheets/Navbar.scss'
 
 //Routes
 import CPlusPlus from './languages/CPlusPlus'
@@ -63,60 +64,60 @@ export default class Routes extends React.Component {
     return (
       <React.Fragment>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Method Master</NavbarBrand>
+          <NavbarBrand href="/" id="brand">Method Master</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret id="mainNavbarItem">
                   Flashcards
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem href="#flashcards/languages/select">
+                  <DropdownItem href="#flashcards/languages/select" id="subNavbarItem">
                     Languages
                   </DropdownItem>
-                  <DropdownItem href="#">
+                  <DropdownItem href="#" id="subNavbarItem">
                     Difficulty
                   </DropdownItem>
-                  <DropdownItem href="#">
+                  <DropdownItem href="#" id="subNavbarItem">
                     Data Type
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem href="#flashcards">
+                  <DropdownItem href="#flashcards" id="subNavbarItem">
                     All
                   </DropdownItem>
                   {userLoggedIn &&
-                    <DropdownItem href={`#users/${currentUser.id}/flashcards`}>
+                    <DropdownItem href={`#users/${currentUser.id}/flashcards`} id="subNavbarItem">
                       My Flashcards
                     </DropdownItem>
                   }
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="#">Playground</NavLink>
+                <NavLink href="#" id="mainNavbarItem">Playground</NavLink>
               </NavItem>
               {!userLoggedIn &&
                 <NavItem>
-                  <NavLink href="#users/session">Sign In</NavLink>
+                  <NavLink href="#users/session" id="mainNavbarItem">Sign In</NavLink>
                 </NavItem>
               }
               {userLoggedIn &&
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
+                  <DropdownToggle nav caret id="mainNavbarItem">
                     {currentUser.email}
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem href="#">
+                    <DropdownItem href="#" id="subNavbarItem">
                       My Profile
                     </DropdownItem>
-                    <DropdownItem href={`#users/${currentUser.id}/flashcards`}>
+                    <DropdownItem href={`#users/${currentUser.id}/flashcards`} id="subNavbarItem">
                       My Flashcards
                     </DropdownItem>
-                    <DropdownItem href={`#users/${currentUser.id}/newflashcard`}>
+                    <DropdownItem href={`#users/${currentUser.id}/newflashcard`} id="subNavbarItem">
                       Create Flashcards
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem href="#users/session">
+                    <DropdownItem href="#users/session" id="subNavbarItem">
                       Sign Out
                     </DropdownItem>
                   </DropdownMenu>
