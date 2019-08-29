@@ -14,9 +14,9 @@ export default class Flashcards extends React.Component {
       },
       style: {
         color: 'white',
+        zIndex: 10,
       },
-      correctCount: 0,
-      incorrectCount: 0,
+      count: 0,
     }
   }
 
@@ -27,13 +27,25 @@ export default class Flashcards extends React.Component {
   }
 
   handleClick = (flashcard, index, rand) => {
+    const { count } = this.state
     if (flashcard.correct_answer.toLowerCase() == rand.toLowerCase()) {
       flashcard.success = true
-      console.log(flashcard.success)
       this.handleResponse(flashcard, index)
+      this.setState(state => {
+        return{
+          count: state.count ++
+        }
+      })
     } else {
       flashcard.success = false
       this.handleResponse(flashcard, index)
+      if (count > 0) {
+        this.setState(state => {
+          return{
+            count: state.count --
+          }
+        })
+      }
     }
   }
 
@@ -45,16 +57,13 @@ export default class Flashcards extends React.Component {
       this.setState(state => {
         return{
           style: {
-            color: 'green',
-            zIndex: 10,
-          },
-          correctCount: state.correctCount ++
+            color: 'green'
+          }
         }
       })
-      console.log(this.state.correctCount)
-      if (this.state.correctCount < 5) {
+      if (this.state.count < 5) {
         alert("Correct!")
-      } else if (this.state.correctCount >= 5 && this.state.correctCount < 10) {
+      } else if (this.state.count >= 5 && this.state.count < 10) {
         alert("You're on a Roll!")
       }
       // return setTimeout(() => {return flashcards.splice(index, 1)}, 2000)
@@ -62,15 +71,13 @@ export default class Flashcards extends React.Component {
       this.setState(state => {
         return{
           style: {
-            color: 'red',
-            zIndex: 10,
-          },
-          incorrectCount: state.incorrectCount ++
+            color: 'red'
+          }
         }
       })
-      console.log(this.state.incorrectCount)
       alert(responses[randomNum()])
     }
+    console.log(this.state.count)
   }
 
   randomAnswers = flashcard => {
@@ -101,7 +108,14 @@ export default class Flashcards extends React.Component {
   allCards = () => {
     const { flashcards } = this.props
     return flashcards.map(flashcard => {
-      let style = flashcard.success !== null ? this.state.style : { color: 'white' }
+      let style
+      if (flashcard.success === true) {
+        style = { color: 'green' }
+      } else if (flashcard.success === false) {
+        style = { color: 'red' }
+      } else {
+        style = { color: 'white' }
+      }
       return(
         <div key={flashcard.id}>
           <Card id="flashcard">
