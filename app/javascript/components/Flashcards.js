@@ -1,6 +1,7 @@
 import React from "react"
 import { Button, Card, CardHeader, CardBody,
   CardTitle, CardSubtitle, FormGroup, Input, Label } from 'reactstrap'
+import '../../assets/stylesheets/flashcards.scss'
 
 export default class Flashcards extends React.Component {
   constructor(props){
@@ -12,7 +13,7 @@ export default class Flashcards extends React.Component {
         difficulty: '',
       },
       style: {
-        backgroundColor: 'blue',
+        color: 'white',
       },
       correctCount: 0,
       incorrectCount: 0,
@@ -44,7 +45,8 @@ export default class Flashcards extends React.Component {
       this.setState(state => {
         return{
           style: {
-            backgroundColor: 'green'
+            color: 'green',
+            zIndex: 10,
           },
           correctCount: state.correctCount ++
         }
@@ -60,7 +62,8 @@ export default class Flashcards extends React.Component {
       this.setState(state => {
         return{
           style: {
-            backgroundColor: 'red'
+            color: 'red',
+            zIndex: 10,
           },
           incorrectCount: state.incorrectCount ++
         }
@@ -98,15 +101,15 @@ export default class Flashcards extends React.Component {
   allCards = () => {
     const { flashcards } = this.props
     return flashcards.map(flashcard => {
-      let style = flashcard.success !== null ? this.state.style : { backgroundColor: 'blue' }
+      let style = flashcard.success !== null ? this.state.style : { color: 'white' }
       return(
         <div key={flashcard.id}>
-          <Card style={ style }>
-            <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
+          <Card id="flashcard">
+            <CardHeader style={ style } id="flashcardText">{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
-              <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
-              <CardTitle>{flashcard.difficulty.toUpperCase()}</CardTitle>
-              <CardSubtitle>{flashcard.question}</CardSubtitle>
+              <CardTitle style={ style } id="flashcardText">{flashcard.data_type.toUpperCase()}</CardTitle>
+              <CardTitle style={ style } id="flashcardText">{flashcard.difficulty.toUpperCase()}</CardTitle>
+              <CardSubtitle style={ style } id="flashcardText">{flashcard.question}</CardSubtitle>
             </CardBody>
             <CardBody>
               {this.randomAnswers(flashcard)}
@@ -129,11 +132,11 @@ export default class Flashcards extends React.Component {
         return(
           <div key={flashcard.id}>
             <Card>
-              <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
+              <CardHeader style={ style } id="flashcardText">{flashcard.language.toUpperCase()}</CardHeader>
               <CardBody>
-                <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>
-                <CardTitle>{flashcard.difficulty.toUpperCase()}</CardTitle>
-                <CardSubtitle>{flashcard.question}</CardSubtitle>
+                <CardTitle style={ style } id="flashcardText">{flashcard.data_type.toUpperCase()}</CardTitle>
+                <CardTitle style={ style } id="flashcardText">{flashcard.difficulty.toUpperCase()}</CardTitle>
+                <CardSubtitle style={ style } id="flashcardText">{flashcard.question}</CardSubtitle>
               </CardBody>
               <CardBody>
                 {this.randomAnswers(flashcard)}
@@ -151,7 +154,7 @@ export default class Flashcards extends React.Component {
       <React.Fragment>
         <div>
           <FormGroup>
-            <Label for="language">Language</Label>
+            <Label for="language" id="filterForm">Language</Label>
             <Input 
               type="select" 
               name="language" 
@@ -166,7 +169,7 @@ export default class Flashcards extends React.Component {
             </Input>
           </FormGroup>
           <FormGroup>
-            <Label for="dataType">Data Type</Label>
+            <Label for="dataType" id="filterForm">Data Type</Label>
             <Input 
               type="select" 
               name="dataType" 
@@ -187,7 +190,7 @@ export default class Flashcards extends React.Component {
             </Input>
           </FormGroup>
           <FormGroup>
-            <Label for="difficulty">Difficulty</Label>
+            <Label for="difficulty" id="filterForm">Difficulty</Label>
             <Input 
               type="select" 
               name="difficulty" 

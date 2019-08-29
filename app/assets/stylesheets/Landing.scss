@@ -1,9 +1,7 @@
-React.Fragment {
-  background: image-url('blankFlashcardStack.jpg') no-repeat center center fixed opacity(0.5);
+* {
+  background: image-url('blankFlashcardStack.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  // opacity: 0.5;
-  // z-index: 1;
 }
