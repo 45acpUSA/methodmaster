@@ -122,6 +122,7 @@ export default class Flashcards extends React.Component {
 
   filteredFlashcards = () => {
     const { flashcards } = this.props
+    const { style } = this.state
     const { language, dataType, difficulty } = this.state.attributes
     return flashcards.map(flashcard => {
       if (
@@ -149,7 +150,7 @@ export default class Flashcards extends React.Component {
   }
 
   render () {
-    const { attributes } = this.state
+    const { attributes, style } = this.state
     return (
       <React.Fragment>
         <div>
