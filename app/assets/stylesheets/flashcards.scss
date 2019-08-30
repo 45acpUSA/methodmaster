@@ -1,14 +1,61 @@
 // Place all the styles related to the Flashcards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+* {
+  background: image-url('background.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#brand {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+}
+
+#mainNavbarItem {
+  color: white;
+}
+
+#subNavbarItem {
+  color: lightseagreen;
+}
+
 #flashcard {
-  z-index: 10;
+  display: flex;
 }
 
 #flashcardText {
   color: white;
 }
 
+#filterFormDiv {
+  display: inline-flex;
+}
+
 #filterForm {
-  color: white;
+  color: rgb(31, 34, 218);
+}
+
+#filterFormGroupLanguage {
+  display: inline-flex;
+  float: left;
+  padding: 0px, 10px;
+  margin: 0px, 10px;
+}
+
+#filterFormGroupDataType {
+  display: inline-flex;
+  float: center;
+  padding: 0px, 10px;
+  margin: 0px, 10px;
+}
+
+#filterFormGroupDifficulty {
+  display: inline-flex;
+  float: right;
+  padding: 0px, 10px;
+  margin: 0px, 10px;
 }

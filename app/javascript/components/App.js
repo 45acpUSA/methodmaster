@@ -1,9 +1,10 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { HashRouter as Router } from 'react-router-dom'
 import Routes from './Routes'
+// import background from '../../assets/images/background.jpeg'
+import '../../assets/stylesheets/flashcards.scss'
 
-class App extends React.Component {
+export default class App extends React.Component {
   render () {
     const {
       user,
@@ -25,5 +26,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App

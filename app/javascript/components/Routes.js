@@ -13,7 +13,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap'
-import '../../assets/stylesheets/Navbar.scss'
+import '../../assets/stylesheets/flashcards.scss'
 
 //Routes
 import CPlusPlus from './languages/CPlusPlus'

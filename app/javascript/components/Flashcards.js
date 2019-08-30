@@ -164,11 +164,11 @@ export default class Flashcards extends React.Component {
   }
 
   render () {
-    const { attributes, style } = this.state
+    const { attributes } = this.state
     return (
       <React.Fragment>
-        <div>
-          <FormGroup>
+        <div id="filterFormDiv">
+          <FormGroup id="filterFormGroupLanguage">
             <Label for="language" id="filterForm">Language</Label>
             <Input 
               type="select" 
@@ -183,7 +183,7 @@ export default class Flashcards extends React.Component {
               <option>C++</option>
             </Input>
           </FormGroup>
-          <FormGroup>
+          <FormGroup id="filterFormGroupDataType">
             <Label for="dataType" id="filterForm">Data Type</Label>
             <Input 
               type="select" 
@@ -204,7 +204,7 @@ export default class Flashcards extends React.Component {
               <option>Boolean</option>
             </Input>
           </FormGroup>
-          <FormGroup>
+          <FormGroup id="filterFormGroupDifficulty">
             <Label for="difficulty" id="filterForm">Difficulty</Label>
             <Input 
               type="select" 
