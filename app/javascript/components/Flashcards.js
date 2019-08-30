@@ -12,10 +12,6 @@ export default class Flashcards extends React.Component {
         dataType: '',
         difficulty: '',
       },
-      style: {
-        color: 'white',
-        zIndex: 10,
-      },
       count: 0,
     }
   }
@@ -114,7 +110,7 @@ export default class Flashcards extends React.Component {
       } else if (flashcard.success === false) {
         style = { color: 'red' }
       } else {
-        style = { color: 'white' }
+        style = { color: 'blue' }
       }
       return(
         <div key={flashcard.id}>
@@ -136,7 +132,6 @@ export default class Flashcards extends React.Component {
 
   filteredFlashcards = () => {
     const { flashcards } = this.props
-    const { style } = this.state
     const { language, dataType, difficulty } = this.state.attributes
     return flashcards.map(flashcard => {
       if (
@@ -144,6 +139,14 @@ export default class Flashcards extends React.Component {
         dataType.toLowerCase() === flashcard.data_type.toLowerCase() &&
         difficulty.toLowerCase() === flashcard.difficulty.toLowerCase() )
       {
+        let style
+        if (flashcard.success === true) {
+          style = { color: 'green' }
+        } else if (flashcard.success === false) {
+          style = { color: 'red' }
+        } else {
+          style = { color: 'blue' }
+        }
         return(
           <div key={flashcard.id}>
             <Card>
