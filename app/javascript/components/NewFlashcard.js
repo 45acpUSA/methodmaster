@@ -73,117 +73,142 @@ handleFormSubmit = event => {
     const { currentUser } = this.props
     return (
       <React.Fragment>
-        <h1>New Flashcard</h1>
-        <FormGroup>
-          <Label for="language">Language</Label>
-          <Input
-            type="select" 
-            name="language"
-            onChange={ this.handleChange }
-            value={ attributes.language }
-          >
-            <option>Select...</option>
-            <option>JavaScript</option>
-            <option>Ruby</option>
-            <option>Python</option>
-            <option>C++</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="data_type">Data Type</Label>
-          <Input
-            type="select" 
-            name="data_type"
-            onChange={this.handleChange}
-            value = {attributes.data_type}
-          >
-            <option>Select...</option>
-            <option>String</option>
-            <option>Number</option>
-            <option>Array</option>
-            <option>Object</option>
-            <option>Math</option>
-            <option>Date</option>
-            <option>RegEx</option>
-            <option>Operators</option>
-            <option>Statements</option>
-            <option>Boolean</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="difficulty">Difficulty</Label>
-          <Input
-            type="select" 
-            name="difficulty"
-            onChange={this.handleChange}
-            value = {attributes.difficulty}
-          >
-            <option>Select...</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
-          <Label for="question">Question</Label>
-          <Input
-            type="text" 
-            name="question"
-            onChange={this.handleChange}
-            value = {attributes.question}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="correct_answer">Correct Answer</Label>
-          <Input
-            type="text" 
-            name="correct_answer"
-            onChange={this.handleChange}
-            value = {attributes.correct_answer}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="incorrect_answer1">First Incorrect Answer</Label>
-          <Input 
-            type="text" 
-            name="incorrect_answer1"
-            onChange={this.handleChange}
-            value = {attributes.incorrect_answer1}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="incorrect_answer2">Second Incorrect Answer</Label>
-          <Input 
-            type="text" 
-            name="incorrect_answer2"
-            onChange={this.handleChange}
-            value = {attributes.incorrect_answer2}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="incorrect_answer3">Third Incorrect Answer</Label>
-          <Input 
-            type="text" 
-            name="incorrect_answer3"
-            onChange={this.handleChange}
-            value = {attributes.incorrect_answer3}
-          />
-        </FormGroup>
-        
-        <Button id="newCardSaveButton" color="primary" onClick={ this.handleFormSubmit }>Save</Button>
-        <Button id="newCardClearButton" color="secondary" onClick={ this.handleClearForm }>Clear</Button>
-        <br />
-        <br />
-        <hr />
-        <div>
-          <Link to={`/users/${currentUser.id}/flashcards`}>Return My Flashcards</Link>
+        <div className="row">
+          <div className="col-md-4" id="entireForm">
+            <h1 id="title">New Flashcard</h1>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="language">Language</Label>
+                <Input
+                  type="select" 
+                  name="language"
+                  onChange={ this.handleChange }
+                  value={ attributes.language }
+                >
+                  <option>Select...</option>
+                  <option>JavaScript</option>
+                  <option>Ruby</option>
+                  <option>Python</option>
+                  <option>C++</option>
+                </Input>
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="data_type">Data Type</Label>
+                <Input
+                  type="select" 
+                  name="data_type"
+                  onChange={this.handleChange}
+                  value = {attributes.data_type}
+                >
+                  <option>Select...</option>
+                  <option>String</option>
+                  <option>Number</option>
+                  <option>Array</option>
+                  <option>Object</option>
+                  <option>Math</option>
+                  <option>Date</option>
+                  <option>RegEx</option>
+                  <option>Operators</option>
+                  <option>Statements</option>
+                  <option>Boolean</option>
+                </Input>
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="difficulty">Difficulty</Label>
+                <Input
+                  type="select" 
+                  name="difficulty"
+                  onChange={this.handleChange}
+                  value = {attributes.difficulty}
+                >
+                  <option>Select...</option>
+                  <option>Easy</option>
+                  <option>Medium</option>
+                  <option>Hard</option>
+                </Input>
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="question">Question</Label>
+                <Input
+                  type="textarea" 
+                  name="question"
+                  onChange={this.handleChange}
+                  value = {attributes.question}
+                  className="form-control"
+                />
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="correct_answer">Correct Answer</Label>
+                <Input
+                  type="textarea" 
+                  name="correct_answer"
+                  onChange={this.handleChange}
+                  value = {attributes.correct_answer}
+                  className="form-control"
+                  />
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="incorrect_answer1">First Incorrect Answer</Label>
+                <Input 
+                  type="textarea" 
+                  name="incorrect_answer1"
+                  onChange={this.handleChange}
+                  value = {attributes.incorrect_answer1}
+                  className="form-control"
+                  />
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="incorrect_answer2">Second Incorrect Answer</Label>
+                <Input 
+                  type="textarea" 
+                  name="incorrect_answer2"
+                  onChange={this.handleChange}
+                  value = {attributes.incorrect_answer2}
+                  className="form-control"
+                  />
+              </div>
+            </FormGroup>
+            <FormGroup className="form-horizontal">
+              <div className="form-group">
+                <Label className="control-label" for="incorrect_answer3">Third Incorrect Answer</Label>
+                <Input 
+                  type="textarea" 
+                  name="incorrect_answer3"
+                  onChange={this.handleChange}
+                  value = {attributes.incorrect_answer3}
+                  className="form-control"
+                  />
+                </div>
+            </FormGroup>
+            
+            <Button id="newCardSaveButton" color="primary" onClick={ this.handleFormSubmit }>Save</Button>
+            <Button id="newCardClearButton" color="secondary" onClick={ this.handleClearForm }>Clear</Button>
+            <br />
+            <br />
+            <hr />
+            <div>
+              <Link to={`/users/${currentUser.id}/flashcards`}>Return to My Flashcards</Link>
+            </div>
+            <div>
+              <Link to='/#'>Return to My Profile</Link>
+            </div>
+            {success &&
+              <Redirect to={`/users/${currentUser.id}/flashcards`} />
+            }
+          </div>
         </div>
-        <div>
-          <Link to='/#'>Return My Profile</Link>
-        </div>
-        {success &&
-          <Redirect to={`/users/${currentUser.id}/flashcards`} />
-        }
       </React.Fragment>
     );
   }
