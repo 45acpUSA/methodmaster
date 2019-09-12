@@ -63,7 +63,7 @@ export default class Routes extends React.Component {
 
     return (
       <React.Fragment>
-        <Navbar color="light" light expand="md">
+        <Navbar light expand="md">
           <NavbarBrand href="/" id="brand">Method Master</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
