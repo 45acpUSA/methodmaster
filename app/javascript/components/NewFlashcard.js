@@ -59,6 +59,7 @@ handleFormSubmit = event => {
   })
   .then(response => {
     response.json()
+    this.props.handleNewFlashcard(response)
     .then(data => {
       console.log("Successful" + data)
     })
