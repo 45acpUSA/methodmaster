@@ -18,14 +18,17 @@ export default class MyFlashcards extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch('/users/:user_id/flashcards.json')
+    const { currentUser } = this.props
+    let userId = currentUser.id
+    fetch(`/users/${userId}/flashcards.json`)
       .then(resp => resp.json())
       .then(data => this.setState({ myFlashcards: data }))
   }
 
   handleDelete = flashcard => {
-    console.log(flashcard.id)
-    fetch(`/flashcards/${flashcard.id}`, {
+    const { currentUser } = this.props
+    let userId = currentUser.id
+    fetch(`/users/${userId}/flashcards/${flashcard.id}`, {
       method: "DELETE"
     })
     .then(response => {

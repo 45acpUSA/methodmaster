@@ -53,7 +53,6 @@ export default class Routes extends React.Component {
 
   handleNewFlashcard = flashcard => {
     const { flashcards } = this.state
-    console.log(flashcard)
     flashcards.push(flashcard)
     let updatedFlashcards = flashcards
     this.setState({ flashcards: updatedFlashcards })

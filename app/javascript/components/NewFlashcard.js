@@ -206,7 +206,8 @@ handleFormSubmit = event => {
               <Link to='/#'>Return to My Profile</Link>
             </div>
             {success &&
-              <Redirect to={`/users/${currentUser.id}/flashcards`} />
+              // <Redirect to={`/users/${currentUser.id}/flashcards`} />
+              <Redirect to='/flashcards' />
             }
           </div>
         </div>
