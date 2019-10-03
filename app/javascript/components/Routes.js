@@ -53,7 +53,13 @@ export default class Routes extends React.Component {
 
   handleNewFlashcard = response => {
     const { flashcards } = this.state
-    let updatedFlashcards = flashcards.concat(response)
+    let updatedFlashcards = flashcards.push(response)
+    this.setState({ flashcards: updatedFlashcards })
+  }
+
+  handleDelete = id => {
+    const { flashcards } = this.state
+    let updatedFlashcards = flashcards.filter(value => value.id !== id)
     this.setState({ flashcards: updatedFlashcards })
   }
 
@@ -223,6 +229,7 @@ export default class Routes extends React.Component {
                 componentDidMount={ this.componentDidMount }
                 currentUser={ currentUser }
                 userSignInRoute={ userSignInRoute }
+                handleDelete={ this.handleDelete }
               />
             }
           />
