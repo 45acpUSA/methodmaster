@@ -23,10 +23,6 @@ export default class MyFlashcards extends React.Component {
       .then(data => this.setState({ myFlashcards: data }))
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-
-  }
-
   handleDelete = flashcard => {
     console.log(flashcard.id)
     fetch(`/flashcards/${flashcard.id}`, {

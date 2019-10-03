@@ -61,8 +61,8 @@ handleFormSubmit = event => {
     response.json()
     .then(data => {
       console.log("Successful" + data)
+      this.props.handleNewFlashcard(data)
     })
-    // this.props.handleNewFlashcard(response)
   })
 
   let redirect = success === false ? true : false
