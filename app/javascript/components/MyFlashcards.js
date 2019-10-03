@@ -23,6 +23,10 @@ export default class MyFlashcards extends React.Component {
       .then(data => this.setState({ myFlashcards: data }))
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+
+  }
+
   handleDelete = flashcard => {
     console.log(flashcard.id)
     fetch(`/flashcards/${flashcard.id}`, {
@@ -31,6 +35,8 @@ export default class MyFlashcards extends React.Component {
     .then(response => {
       response.json()
     })
+    let updatedFlashcards = this.state.myFlashcards.filter(value => value.id !== flashcard.id)
+    this.setState({ myFlashcards: updatedFlashcards })
   }
 
   handleClick = (flashcard, index, rand) => {
@@ -45,7 +51,6 @@ export default class MyFlashcards extends React.Component {
   }
 
   handleResponse = (flashcard, index) => {
-    // const { flashcards } = this.props
     const responses = ["Try Again", "Not Quite", "Not the Droid You're Looking For"]
     const randomNum = () => Math.floor(Math.random() * 3)
     if (flashcard.success === true) {
