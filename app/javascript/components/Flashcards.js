@@ -103,7 +103,7 @@ export default class Flashcards extends React.Component {
 
   allCards = () => {
     const { flashcards } = this.props
-    return flashcards.map(flashcard => {
+    return flashcards.map((flashcard, index) => {
       let style
       if (flashcard.success === true) {
         style = { color: 'green' }
@@ -113,7 +113,7 @@ export default class Flashcards extends React.Component {
         style = { color: 'blue' }
       }
       return(
-        <div key={flashcard.id}>
+        <div key={index}>
           <Card id="flashcard">
             <CardHeader style={ style } id="flashcardText">{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
@@ -133,7 +133,7 @@ export default class Flashcards extends React.Component {
   filteredFlashcards = () => {
     const { flashcards } = this.props
     const { language, dataType, difficulty } = this.state.attributes
-    return flashcards.map(flashcard => {
+    return flashcards.map((flashcard, index) => {
       if (
         language.toLowerCase() === flashcard.language.toLowerCase() &&
         dataType.toLowerCase() === flashcard.data_type.toLowerCase() &&
@@ -148,7 +148,7 @@ export default class Flashcards extends React.Component {
           style = { color: 'blue' }
         }
         return(
-          <div key={flashcard.id}>
+          <div key={ index }>
             <Card>
               <CardHeader style={ style } id="flashcardText">{flashcard.language.toUpperCase()}</CardHeader>
               <CardBody>

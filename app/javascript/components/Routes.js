@@ -32,14 +32,13 @@ import UsersSession from './UsersSession'
 export default class Routes extends React.Component {
   constructor(props) {
     super(props)
-    this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
       flashcards: [],
     }
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     })
@@ -51,11 +50,8 @@ export default class Routes extends React.Component {
       .then(data => this.setState({ flashcards: data }))
   }
 
-  handleNewFlashcard = flashcard => {
-    const { flashcards } = this.state
-    flashcards.push(flashcard)
-    let updatedFlashcards = flashcards
-    this.setState({ flashcards: updatedFlashcards })
+  handleNewFlashcard = newFlashcards => {
+    this.setState({ flashcards: newFlashcards })
   }
 
   handleDelete = id => {
@@ -227,7 +223,6 @@ export default class Routes extends React.Component {
               props =>
               <MyFlashcards
                 {...props}
-                componentDidMount={ this.componentDidMount }
                 currentUser={ currentUser }
                 userSignInRoute={ userSignInRoute }
                 handleDelete={ this.handleDelete }

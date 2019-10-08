@@ -14,7 +14,6 @@ export default class MyFlashcards extends React.Component {
       correctCount: 0,
       incorrectCount: 0,
     }
-    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount = () => {
@@ -110,10 +109,10 @@ export default class MyFlashcards extends React.Component {
   myFlashcards = () => {
     const { myFlashcards } = this.state
     const { currentUser } = this.props
-    return myFlashcards.map(flashcard => {
+    return myFlashcards.map((flashcard, index) => {
       if (flashcard.user_id == currentUser.id) {
         return (
-          <Card key={flashcard.id}>
+          <Card key={ index }>
             <CardHeader>{flashcard.language.toUpperCase()}</CardHeader>
             <CardBody>
               <CardTitle>{flashcard.data_type.toUpperCase()}</CardTitle>

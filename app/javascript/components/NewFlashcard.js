@@ -59,10 +59,14 @@ handleFormSubmit = event => {
   })
   .then(response => {
     response.json()
-    .then(data => {
-      console.log("Successful" + data)
-      this.props.handleNewFlashcard(data)
-    })
+  })
+  .then(data => {
+    console.log("Successful" + data)
+  })
+  .then(success => {
+    fetch('/flashcards.json')
+    .then(resp => resp.json())
+    .then(data => this.props.handleNewFlashcard(data))
   })
 
   let redirect = success === false ? true : false
@@ -206,7 +210,6 @@ handleFormSubmit = event => {
               <Link to='/#'>Return to My Profile</Link>
             </div>
             {success &&
-              // <Redirect to={`/users/${currentUser.id}/flashcards`} />
               <Redirect to='/flashcards' />
             }
           </div>
